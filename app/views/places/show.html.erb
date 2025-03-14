@@ -1,11 +1,38 @@
+<div class="row">
 <h1><%= @place["name"] %></h1>
+  <% for post in @entries %>
+    <div class="col-sm-6 col-md-3">
+      <h4>
+        <% user = User.find_by({ "id" => post["user_id"] }) %>
+        <% if user %>
+          <%= user["username"] %>
+        <% else %>
+          anonymous
+        <% end %>
+      </h4>
 
-<h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
-<% end %>
+      <% if post.uploaded_image.attached? %>
+        <img src="<%= url_for(post.uploaded_image) %>" class="img-fluid">
+    
+      <% else %>
+        <img src="<%= post["image"] %>" class="img-fluid">
+      <% end %>
+
+  <p><%= post["description"] %></p>
+  <h3><%= post["title"] %></h3>
+  <h4><%= post["occurred_on"] %></h4>
+
+
+        <div class="col text-end">
+          <div class="small fst-italic"><%= post["created_at"].strftime("%-m/%d/%y at %-I:%M %p") %></div>
+        </div>
+      </div>
+
+      <p><%= post["body"] %></p>
+    </div>
+  <% end %>
+</div>
+
 
 <p>
   <a href="/entries/new?place_id=<%= @place["id"] %>">New Entry</a>
@@ -14,3 +41,5 @@
 <p>
   <a href="/places">Back to All Places</a>
 </p>
+
+
