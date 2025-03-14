@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def show
+    @user = User.find_by({ "id" => params["id"] })
+  end
+
   def new
   end
 
@@ -8,6 +12,7 @@ class UsersController < ApplicationController
     @user["email"] = params["email"]
     @user["password"] = BCrypt::Password.create(params["password"])
     @user.save
-    redirect_to "/users/#{@user["id"]}"
+    flash[:notice] = "Thanks for signing up. Please login."
+    redirect_to "/login"
   end
 end
