@@ -2,9 +2,9 @@
   <% for post in @entries %>
     <div class="col-sm-6 col-md-3">
       <h4>
-        <% user = User.find_by({ "id" => post["user_id"] }) %>
-        <% if user %>
-          <%= user["username"] %>
+        
+        <% if post.user %>
+          <%= post.user["username"] %>
         <% else %>
           anonymous
         <% end %>
