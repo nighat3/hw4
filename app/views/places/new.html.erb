@@ -3,8 +3,6 @@
     <div class="col-12 col-md-8 col-lg-6">
       <h1 class="text-center border-bottom pb-3">Add New Place</h1>
 
-            <% if @user != nil %>
-
             <form action="/places" method="post" enctype="multipart/form-data">
 
             <div class="mb-3">
@@ -17,6 +15,5 @@
               <a href="/" class="btn btn-outline-secondary">Cancel</a>
             </form>
 
-            <% else %>
-              You must first <a href="/login">login</a> to create a new place.
-            <% end %>
+            
+          

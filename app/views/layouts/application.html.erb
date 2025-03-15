@@ -42,12 +42,20 @@
             <li class="nav-item"><a href="/logout" class="btn btn-success">Logout</a></li>
           <% end %>
 
-        </div>
+        </ul>
   
       </div>
     </div>
   </nav>
 
+    <div class="container mt-3">
+    <% if flash["notice"] != nil %>
+      <div class="alert alert-primary">
+        <%= flash["notice"] %>
+      </div>
+    <% end %>
+
     <%= yield %>
+  </div>
   </body>
 </html>

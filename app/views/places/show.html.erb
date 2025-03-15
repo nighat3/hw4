@@ -1,13 +1,21 @@
-  <div class="mt-4 text-center">
-    <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-success">New Post</a>
-    <a href="/places" class="btn btn-outline-secondary">Back to All Places</a>
-  </div>
+
+<div class="mt-4 text-center">
+<a href="/places" class="btn btn-outline-secondary">Back to All Places</a>
+</div>
 
 <div class="container">
  <h1 class="border-bottom pb-3">My Posts</h1>
+ 
+ <% if @current_user.present? %>
+
+   <div class="mt-4 text-center">
+    <a href="/entries/new?place_id=<%= @place["id"] %>" class="btn btn-success">New Post</a>
+  </div>
+
   <div class="row gy-4">
     <% for post in @entries %>
       <% if post.user && post.user["id"] == @current_user["id"] %>
+      
         <div class="col-sm-6 col-md-4 col-lg-3">
           <h5 class="fw-bold"><%= post.user["username"] %></h5>
           <p><%= post["description"] %></p>
@@ -27,6 +35,14 @@
         </div>
       <% end %>
     <% end %>
+
+    <% end %>
+    
+    <% if @current_user.nil? %>
+     
+    You must <a href="/login">login</a> to view your posts.
+  
+     <% end %>
   </div>
 
 </div>
