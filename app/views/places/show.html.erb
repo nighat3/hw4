@@ -1,10 +1,11 @@
 
+<h1 class="border-bottom pb-3"> <%= @place["name"] %></h1>
 <div class="mt-4 text-center">
 <a href="/places" class="btn btn-outline-secondary">Back to All Places</a>
 </div>
 
 <div class="container">
- <h1 class="border-bottom pb-3">My Posts</h1>
+ <h3 class="border-bottom pb-3">My Posts</h3>
  
  <% if @current_user.present? %>
 
@@ -16,13 +17,13 @@
     <% for post in @entries %>
       <% if post.user && post.user["id"] == @current_user["id"] %>
       
-        <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="col-12 col-md-6 col-lg-4">
           <h5 class="fw-bold"><%= post.user["username"] %></h5>
           <p><%= post["description"] %></p>
           <p><%= post["occured_at"] %></p>
 
           <% if post.uploaded_image.attached? %>
-            <img src="<%= url_for(post.uploaded_image) %>" class="img-fluid rounded mb-2" style="max-width: 100%; height: auto;">
+            <img src="<%= url_for(post.uploaded_image) %>" class="img-fluid rounded mb-2">
           <% else %>
             <p class="text-muted">No image available</p>
           <% end %>
@@ -32,7 +33,7 @@
               <%= post["created_at"].strftime("%-m/%d/%y at %-I:%M %p") %>
             </small>
           </div>
-        </div>
+          </div>
       <% end %>
     <% end %>
 
